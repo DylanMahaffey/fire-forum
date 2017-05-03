@@ -1,0 +1,75 @@
+    section{
+        width: 100%;
+        height: 100vh;
+    }
+    .fire{
+        margin: 20px;
+        background: #303030;
+        color: white;
+        box-shadow: 3px 3px 7px rgba(0, 0, 0, .5);
+        border-radius: 2px;
+    }
+    .fire p{
+        display: inline;
+        margin: 0 8px;
+    }
+    .fire-name{
+        font-size: 1.5em;
+        background: #404040;
+        width: 100%;
+    }
+    .detail-section{
+        width: 100%;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #404040;
+    }
+    .alt{
+        background: #404040;
+    }
+    footer{
+        width: 100%;
+        height: 50px;
+        position: fixed;
+        bottom: 0;
+    }
+    footer button{
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: white;
+        font-size: 1.5em;
+    }
+    #modal{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        height: 100vh;
+        width: 100vw;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.4);
+    }
+    .fire-form{
+        width: 70%;
+        height: auto;
+        padding: 20px;
+        color: white;
+        background: #303030;
+        box-shadow: 5px 5px 10px black;
+        border-radius: 5px;
+    }
+    form input {
+        width: 100%;
+        margin: 7px 0;
+    }
+    .spread-radio{
+        width: 5%;
+    }
+    form p {
+        display: inline;
+        margin-right: 10px;
+    }
