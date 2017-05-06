@@ -1,4 +1,5 @@
 <?php
+
     require 'include/header.php';
     $id = $_GET["id"];
 // MySQL connection
@@ -15,26 +16,47 @@
     if(!$fires || !$comments){
         die("database query failed.");
     }
+
 // Getting the results from the fires table for the main information
     $fire = mysqli_fetch_assoc($fires);
-
-    if($fire["spread"] == "s"){
-        $spread = "Slow";
-    } elseif($fire["spread"] == "m"){
-        $spread = "Medium";
-    } elseif ($fire["spread"] == "r") {
-        $spread = "Rapid";
+    if(!isset($fire["id"])){
+        header("Location: fire-feed.php");
     };
-    $acres = $fire["acres"];
-    $structures = $fire["structures"];
-    $containment = $fire["containment"];
+    $name = $fire["name"];
+    if($fire["spread"] == "a"){
+        $spread = "Slow";
+    } elseif($fire["spread"] == "b"){
+        $spread = "Medium";
+    } elseif ($fire["spread"] == "c") {
+        $spread = "Rapid";
+    } else{
+        $spread = "Unknown";
+    };
+    if($fire["acres"] == 0){
+        $acres = "unknown";
+    }else{
+        $acres = $fire["acres"];
+    }
+    if($fire["structures"] == 0){
+        $structures = "unknown";
+    }else{
+        $structures = $fire["structures"];
+    }
+    if($fire["containment"] == 0){
+        $containment = "unknown";
+    }else{
+        $containment = $fire["containment"];
+    };
  ?>
-
+ <a href="fire-feed.php"><div title="Back to Fire Feed" class="backArrow">
+    &#10140;
+  </div></a>
+<div class="head-name"><h1><?= $name ?></h1></div>
 <div class="head-info">
     <div class="main-info"><h3>Spread Rate:</h3> <br>      <p><?= $spread ?></p>        </div>
     <div class="main-info"><h3>Acres:</h3>           <br>      <p><?= $acres ?></p>          </div>
     <div class="main-info"><h3>Structures:</h3>    <br>      <p><?= $structures?></p>   </div>
-    <div class="main-info"><h3>Containment:</h3><br>     <p><?= $containment."%"?></p></div>
+    <div class="main-info"><h3>Containment:</h3><br>     <p><?= $containment?></p></div>
 </div>
 
 <section>
@@ -59,14 +81,14 @@
 </section>
 
 <footer>
-    <button id="addComment">Add Comment</button>
+    <button id="add">Add Comment</button>
 </footer>
 <!-- the form for adding a new comment -->
 <div id="modal">
     <div class="comment-contain">
         <form class="comment-form" action="include/add-comment.php?<?= "id=$id" ?>" method="post">
             Add a comment: <br>
-            <textarea name="comment" ></textarea>
+            <textarea name="comment"></textarea>
             <br>
             <p>only change the following to update:</p>
             <p class="input-title">Spread Rate:</p><br>
@@ -74,23 +96,27 @@
                 <?php
 //  this if statement is to check the radio button of the existing condition
 
-                    if($fire["spread"] == "s"){
+                    if($fire["spread"] == "a"){
                         $s_check = "checked='checked'";
                         $m_check = "";
                         $r_check = "";
-                    }elseif($fire["spread"] == "m"){
+                    }elseif($fire["spread"] == "b"){
                         $s_check = "";
                         $m_check = "checked='checked'";
                         $r_check = "";
-                    }elseif($fire["spread"] == "r"){
+                    }elseif($fire["spread"] == "c"){
                         $s_check = "";
                         $m_check = "";
                         $r_check = "checked='checked'";
+                    }else{
+                        $s_check = "";
+                        $m_check = "";
+                        $r_check = "'";
                     }
                  ?>
-                <input type="radio" name="spread" value="s" <?= $s_check ?>><p class="space">slow</p>
-                <input type="radio" name="spread" value="m" <?= $m_check ?>><p class="space">medium</p>
-                <input type="radio" name="spread" value="r" <?= $r_check ?>><p>rapid</p>
+                <input type="radio" name="spread" value="a" <?= $s_check ?>><p class="space">slow</p>
+                <input type="radio" name="spread" value="b" <?= $m_check ?>><p class="space">medium</p>
+                <input type="radio" name="spread" value="c" <?= $r_check ?>><p>rapid</p>
             </div>
             <br>
             <p class="input-title">Acres:</p> <br>
@@ -100,30 +126,28 @@
             <p class="input-title">Containment: </p><br>
             <input type="number" name="containment" value="<?= $containment ?>"> %<br>
 
-            <input id="submit" type="submit" name="submit" value="Submit">
+            <input type="submit" name="submit" value="Submit">
             <input type="reset" id="cancel" value="Cancel">
         </form>
     </div>
 </div>
 
 <script type="text/javascript">
-// javascript to work the modal
-    var   add = document.getElementById("addComment"),
-            modal = document.getElementById("modal"),
-            cancel = document.getElementById("cancel"),
-            submit = document.getElementById("submit");
-    add.onclick = function() {
-        modal.style.display = "flex"
-    }
-    submit.onclick = function() {
-        modal.style.display = "none"
-    }
-    cancel.onclick = function() {
-        modal.style.display = "none"
-    }
+    var add = document.getElementById("add"),
+          cancel = document.getElementById("cancel"),
+          modal = document.getElementById("modal");
+
+          add.onclick = function(){
+              modal.style.display = "flex";
+          }
+          cancel.onclick = function(){
+              modal.style.display = "none";
+          }
 </script>
+
 <?php
         mysqli_free_result($fires);
+        mysqli_free_result($comments);
         mysqli_close($conn);
         include 'include/footer.php';
  ?>

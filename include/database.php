@@ -1,7 +1,6 @@
 <?php
-
 $storyFeed = [
-    array("img/cock-face.jpg", "Firefighter sets new record for dicks sucked"),
-    array("img/pussy-shit.jpg", "BREAKING NEWS: fire is hot!"),
-    array("img/real-firefighter.jpg", "stuff is happening, and its BIG!")
+    array("img" => "img/cock-face.jpg", "headline" => "Firefighter sets new record for dicks sucked", "link" => "#"),
+    array("img" => "img/pussy-shit.jpg", "headline" => "BREAKING NEWS: fire is hot!", "link" => "#"),
+    array("img" => "img/real-firefighter.jpg", "headline" => "stuff is happening, and its BIG!", "link" => "#")
 ];

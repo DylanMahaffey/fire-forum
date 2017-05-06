@@ -1,14 +1,30 @@
 *{
     margin: 0;
-}
-a{
     text-decoration: none;
+    color: white;
+}
+button, input, select, option{
+    color: black;
 }
 body{
     background:  	#151515;
     width: 100%;
     height: auto;
-    margin-top: 80px;
+    min-height: 100vh;
+    margin-top: 50px;
+}
+@media only screen and (min-width: 736px) {
+    html{
+        background: black;
+        display: flex;
+        justify-content: center;
+    }
+    body, header, footer, nav, #add, #nav-dropdown .nav-option{
+        width: 736px;
+    }
+    body{
+            min-height: 100vh;
+    }
 }
     header{
         width: 100%;
@@ -16,6 +32,7 @@ body{
         position: fixed;
         top: 0;
         box-shadow: 3px 3px 7px rgba(0, 0, 0, .5);
+        z-index: 1;
     }
     header img {
         height: 50px;

@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>California Fire Forum</title>
     <?php
         if( basename($_SERVER['PHP_SELF']) == "forum.php"){
             $headerCss = "css/header.css";
             $css = "css/forum.css";
+        }elseif( basename($_SERVER['PHP_SELF']) == "fire-news.php"){
+            $headerCss = "";
+            $css = "css/fire-news.css";
         }elseif( basename($_SERVER['PHP_SELF']) == "fire-feed.php"){
             $headerCss = "css/header.css";
             $css = "css/fire-feed.css";
@@ -34,10 +37,11 @@
     <link rel="stylesheet" href=" <?= $css ?> ">
 
 </head>
+<?php if( basename($_SERVER['PHP_SELF']) != "fire-news.php"){ ?>
 <body>
     <header>
         <nav>
-            <a href="fire-news.php"><img src="img/fire.png" alt="ego"></a>
+            <a href="fire-news.php"><img src="img/fire.png" alt="ego" title="Fire News"></a>
             <div id="menu-icon">
                 <!-- three white lines -->
                 <p></p> <p></p> <p></p>
@@ -45,8 +49,9 @@
         </nav>
         <div id="nav-dropdown">
             <a href="fire-news.php"><div class="nav-option">News</div></a>
-            <a href="fire-feed.php"><div class="nav-option">Dick Pics</div></a>
+            <a href="fire-feed.php"><div class="nav-option">Fire Feed</div></a>
             <a href="fire-store.php"><div class="nav-option">Store</div></a>
             <a href="suggestions.php"><div class="nav-option">Suggestions</div></a>
         </div>
     </header>
+    <?php } ?>

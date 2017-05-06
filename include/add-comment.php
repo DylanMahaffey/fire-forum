@@ -6,13 +6,30 @@ if(isset($_POST["submit"])){
     } else {
         $username = "Guest";
     };
+    if(empty($_POST["spread"])){
+        $spread = "u";
+    } else {
+        $spread =  $_POST["spread"];
+    };
+    if(empty($_POST["acres"])){
+        $acres = 0;
+    }else{
+        $acres = $_POST["acres"];
+    }
+    if(empty($_POST["structures"])){
+        $structures = 0;
+    }else{
+        $structures = $_POST["structures"];
+    }
+    if(empty($_POST["containment"])){
+        $containment = 0;
+    }else{
+        $containment = $_POST["containment"];
+    }
 
-$text = $_POST["comment"];
+$text = addslashes($_POST["comment"]);
 $fire_id = $_GET["id"];
-$spread = $_POST["spread"];
-$acres = $_POST["acres"];
-$structures = $_POST["structures"];
-$containment = $_POST["containment"];
+
 
 
 $conn = mysqli_connect("localhost", "root", "qpalz,", "fire_forum");

@@ -24,8 +24,6 @@
             die("database query failed.");
         }
     }
-
-
   ?>
     <form id="filter-form" action="fire-feed.php" method="post">
         <select class="" name="filter">

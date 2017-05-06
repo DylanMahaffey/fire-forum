@@ -1,16 +1,29 @@
 <?php
 if(isset($_POST["submit"])){
+    $name = addslashes($_POST["name"]);
 
-    $name = $_POST["name"];
-    $spread = $_POST["spread"];
-    $acres = $_POST["acres"];
-    $structures = $_POST["structures"];
-    $containment = $_POST["containment"];
-
-    // echo $name . $spread . $acres . $spread . $structures . $containment;
+    if (empty($_POST["spread"])){
+        $spread = "u";
+    } else {
+        $spread = $_POST["spread"];
+    }
+    if (empty($_POST["acres"])){
+        $acres = 0;
+    } else {
+        $acres = $_POST["acres"];
+    }
+    if (empty($_POST["structures"])){
+        $structures = 0;
+    } else {
+        $structures = $_POST["structures"];
+    }
+    if (empty($_POST["containment"])){
+        $containment = 0;
+    } else {
+        $containment = $_POST["containment"];
+    }
 
     $conn = mysqli_connect("localhost", "root", "qpalz,", "fire_forum");
-
     if(mysqli_connect_errno()){
         die("database connection failed: ". mysqli_connect_error().
         "(".mysqli_connect_errno().")");
@@ -19,7 +32,7 @@ if(isset($_POST["submit"])){
                      VALUES (now(), now(), '{$name}', '{$spread}', $acres, $structures, $containment)";
     $result = mysqli_query($conn, $query);
     if($result){
-        header('Location: ../fire-feed.php');
+        header("Location: ../fire-feed.php");
     } else {
         die("database query failed. " . mysqli_error($conn));
     }

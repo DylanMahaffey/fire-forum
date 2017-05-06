@@ -1,6 +1,7 @@
     #filter-form{
         color: white;
         width: 100%;
+        padding-top: 25px;
         display: flex;
         justify-content: center;
     }

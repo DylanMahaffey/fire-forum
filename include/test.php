@@ -1,11 +1,4 @@
 <?php
-$array = array("turkey", "peanuts", "asshole", "", "", "percimons");
-$list= [];
-for ($i = 0; $i <count($array);$i++){
-
-    if (!empty($array[$i])){
-        array_push($list, $array[$i]);
-    }
-    // echo $array["$i"]."<br/> <br/>";
-}
-echo "<br/><br/>". print_r($list) ;
+date_default_timezone_set("America/New_York");
+$now = date("h:i:sa");
+echo "The time is $now";
